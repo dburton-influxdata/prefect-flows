@@ -26,10 +26,25 @@ from influxdb_client.client.write_api import SYNCHRONOUS
 #InfuxData Variables
 #token='vcYnOpQjT9rX1zK1LXlDvWBgUcO6DpnSywANo-_bNAlRUUHPIWdKqFy1wJLwGzsQeq3r1HOCrzSUJaHwCdZBTQ=='
 
+# Prefect Blocks
 from prefect.blocks.system import Secret
 secret_block = Secret.load("iox-token")
 # Access the stored secret
 token  = secret_block.get()
+
+from prefect_github import GitHubCredentials
+github_credentials_block = GitHubCredentials.load("github-prefect")
+
+
+#from prefect_github.repository import query_repository
+#from prefect.filesystems import GitHub
+#github_block = GitHub.load("github-influx-downsample")
+
+from prefect_github.repository import GitHubRepository
+github_repository_block = GitHubRepository.load("github-influxdata-repo")
+
+
+######################################
 
 
 org = 'dtiolab'
