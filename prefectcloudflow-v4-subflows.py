@@ -24,7 +24,7 @@ from influxdb_client.client.write_api import SYNCHRONOUS
 
 
 #InfuxData Variables
-#token='vcYnOpQjT9rX1zK1LXlDvWBgUcO6DpnSywANo-_bNAlRUUHPIWdKqFy1wJLwGzsQeq3r1HOCrzSUJaHwCdZBTQ=='
+
 
 # Prefect Blocks
 from prefect.blocks.system import Secret
