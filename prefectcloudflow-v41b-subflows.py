@@ -8,7 +8,7 @@ import asyncio
 from flightsql import FlightSQLClient, connect
 import os
 from datetime import datetime
-import polars as pl
+
 import pyarrow as pa
 import pandas as pd
 from influxdb_client import InfluxDBClient
