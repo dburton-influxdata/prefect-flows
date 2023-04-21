@@ -1,7 +1,7 @@
 from prefect import flow, task
 from prefect.task_runners import SequentialTaskRunner
 from prefect.task_runners import ConcurrentTaskRunner
-from prefect_dask.task_runners import DaskTaskRunner
+#from prefect_dask.task_runners import DaskTaskRunner
 from prefect.deployments import Deployment
 import asyncio
 
