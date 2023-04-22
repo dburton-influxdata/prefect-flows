@@ -204,6 +204,7 @@ def execute_iox_query(measurement):
 
     #Filter out any edge cases where data is older than 30 days (defult retention period)
     # Want to execute prior to downsampleing.
+    print("Drop records that are 30 days old from Dataframe prior to downsampling")
     df[df.time > datetime.datetime.now() - pd.to_timedelta("30day")]
 
 
