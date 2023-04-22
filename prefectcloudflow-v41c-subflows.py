@@ -199,7 +199,7 @@ def execute_iox_query(measurement):
     df = df.set_index(pd.DatetimeIndex(df['time']))
     df.set_index(["time"])
 
-    create_artifact(df)
+    #create_artifact(df)
 
     #Return Constructed and formatted dataframe for processing and analysis
     print(df.head(7))
