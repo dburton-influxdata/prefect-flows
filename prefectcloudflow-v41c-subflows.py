@@ -122,7 +122,7 @@ def write_parquet_table(table, table_name):
 @task()
 def create_artifact(df):
     create_table_artifact(
-    key="For Support Analysis",
+    key="For-Support-Analysis",
     table=df,
     description= "#Please reaview with Flow run and discuss with the customer")
 
