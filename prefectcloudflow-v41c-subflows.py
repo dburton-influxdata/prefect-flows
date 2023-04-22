@@ -115,8 +115,9 @@ def gettable():
 @task()
 def write_parquet_table(table, table_name):
     print("Writing Table:", table_name, "to parquet file on disk")
-    pq.write_table(table, f'{table_name}.parquet', compression='BROTLI')
+    pq.write_table(table, f'{table_name}.parquet', compression='GZIP')
     print("Parquet Table Write Complete")
+
 
 @flow(log_prints=True,
       task_runner=ConcurrentTaskRunner(),
@@ -169,7 +170,11 @@ def execute_iox_query(measurement):
     Table = reader.read_all()
 
     #Write Table (Query Results to Compresed Parquest Files as Badkup)
+    print("Writing Table:", measurement, "to parquet file on disk")
+
     write_parquet_table(Table, measurement)
+
+    print(measurement, "Parquet Write Complete")
 
 
 
