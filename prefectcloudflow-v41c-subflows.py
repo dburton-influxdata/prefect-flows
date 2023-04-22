@@ -196,7 +196,7 @@ def execute_iox_query(measurement):
     create_table_artifact(
         key="For Support Analysis",
         table=df,
-        description= f"#Please reaview {measurement} with Flow run and discuss with the customer"
+        description= "#Please reaview with Flow run and discuss with the customer"
     )
 
 
