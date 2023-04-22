@@ -9,6 +9,7 @@ from prefect.artifacts import create_table_artifact
 from flightsql import FlightSQLClient, connect
 import os
 from datetime import datetime
+import datetime
 
 import pyarrow as pa
 import pyarrow.parquet as pq
@@ -200,6 +201,11 @@ def execute_iox_query(measurement):
     df.set_index(["time"])
 
     #create_artifact(df)
+
+    #Filter out any edge cases where data is older than 30 days (defult retention period)
+    # Want to execute prior to downsampleing.
+    df[df.time > datetime.datetime.now() - pd.to_timedelta("30day")]
+
 
     #Return Constructed and formatted dataframe for processing and analysis
     print(df.head(7))
