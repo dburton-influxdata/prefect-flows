@@ -194,7 +194,7 @@ def execute_iox_query(measurement):
 
     #Write Dataframe into Prefect Artificat for Analysis
     create_table_artifact(
-        key=f"{measurement} - For Support Analysis",
+        key="For Support Analysis",
         table=df,
         description= f"#Please reaview {measurement} with Flow run and discuss with the customer"
     )
