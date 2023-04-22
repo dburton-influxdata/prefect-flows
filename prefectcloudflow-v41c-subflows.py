@@ -115,7 +115,7 @@ def gettable():
 @task()
 def write_parquet_table(table, table_name):
     print("Writing Table:", table_name, "to parquet file on disk")
-    pq.write_table(table, f'{table_name}.parquet', compression='GZIP')
+    pq.write_table(table, f'/tmp/iox_data/{table_name}.parquet', compression='GZIP')
     print("Parquet Table Write Complete")
 
 
