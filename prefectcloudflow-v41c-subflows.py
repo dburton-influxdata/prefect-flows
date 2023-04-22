@@ -119,6 +119,13 @@ def write_parquet_table(table, table_name):
     pq.write_table(table, f'/tmp/iox_data/{table_name}.parquet', compression='GZIP')
     print("Parquet Table Write Complete")
 
+@task()
+def create_artifact(df):
+    create_table_artifact(
+    key="For Support Analysis",
+    table=df,
+    description= "#Please reaview with Flow run and discuss with the customer")
+
 
 @flow(log_prints=True,
       task_runner=ConcurrentTaskRunner(),
@@ -192,13 +199,7 @@ def execute_iox_query(measurement):
     df = df.set_index(pd.DatetimeIndex(df['time']))
     df.set_index(["time"])
 
-    #Write Dataframe into Prefect Artificat for Analysis
-    create_table_artifact(
-        key="For Support Analysis",
-        table=df,
-        description= "#Please reaview with Flow run and discuss with the customer"
-    )
-
+    create_artifact(df)
 
     #Return Constructed and formatted dataframe for processing and analysis
     print(df.head(7))
