@@ -4,6 +4,7 @@ from prefect.task_runners import ConcurrentTaskRunner
 #from prefect_dask.task_runners import DaskTaskRunner
 from prefect.deployments import Deployment
 import asyncio
+from prefect.artifacts import create_table_artifact
 
 from flightsql import FlightSQLClient, connect
 import os
@@ -190,6 +191,14 @@ def execute_iox_query(measurement):
     print("converting time to datetime index")
     df = df.set_index(pd.DatetimeIndex(df['time']))
     df.set_index(["time"])
+
+    #Write Dataframe into Prefect Artificat for Analysis
+    create_table_artifact(
+        key=f"{measurement} - For Support Analysis",
+        table=df,
+        description= f"#Please reaview {measurement} with Flow run and discuss with the customer"
+    )
+
 
     #Return Constructed and formatted dataframe for processing and analysis
     print(df.head(7))
