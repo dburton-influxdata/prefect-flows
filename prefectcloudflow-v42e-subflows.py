@@ -3,6 +3,7 @@ from prefect.task_runners import SequentialTaskRunner
 from prefect.task_runners import ConcurrentTaskRunner
 #from prefect_dask.task_runners import DaskTaskRunner
 from prefect.deployments import Deployment
+from prefect.runtime import flow_run
 import asyncio
 from prefect.artifacts import create_table_artifact
 from prefect.artifacts import create_markdown_artifact
@@ -41,10 +42,20 @@ secret_block = Secret.load("iox-token")
 # Access the stored secret
 token  = secret_block.get()
 
+
+#### Need Bucket Value to run Flow: Using Prefect Paramater to pull at Flow runtime
+#The code is provide at the bottome in main.
 #Get Bucket variable from the command line
 #bucket = sys.argv[1]
+#bucket = variables.get('bucket', default='dtiolab')
 
-bucket = variables.get('bucket', default='dtiolab')
+bucket = 'Windows'
+
+parameter = flow_run.parameters
+#bucket = parameters["bucket"]
+print(bucket)
+print(parameter)
+
 
 from prefect.filesystems import GitHub
 github_block = GitHub.load("github-influxdata-repo")
@@ -60,9 +71,7 @@ pagerduty_webhook_block = PagerDutyWebHook.load("pagerduty")
 
 
 org = 'dtiolab'
-#bucket = 'Windows'
 url = "https://us-east-1-1.aws.cloud2.influxdata.com/"
-
 pa_type = pd.ArrowDtype(pa.timestamp("ns"))
 
 # 3. Instantiate the FlightSQL Client Globally
@@ -336,7 +345,7 @@ def deploy():
       task_runner=ConcurrentTaskRunner(),
       name="iox_prototype_subflows",
       description="Influxdata IOx support workflow prototype - Main Flow.")
-def iox_prototype_subflows(bucket):
+def iox_prototype_subflows(bucket: str):
     
     #Set Variables
     measurement = 'cpu'
@@ -380,8 +389,12 @@ def iox_prototype_subflows(bucket):
 #########################################################################
 
 if __name__ == "__main__":
-    bucket = sys.argv[1]
-    iox_prototype_subflows(bucket)
+    #bucket = sys.argv[1]
+    
+
+
+    #bucket = parameter("bucket", default=dtiolab)
+    iox_prototype_subflows(bucket="dtiolab")
 
     
     #deploy()
