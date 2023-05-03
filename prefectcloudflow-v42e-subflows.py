@@ -50,9 +50,10 @@ token  = secret_block.get()
 #bucket = variables.get('bucket', default='dtiolab')
 
 bucket = 'Windows'
+print(bucket)
 
 parameter = flow_run.parameters
-#bucket = parameters["bucket"]
+bucket = parameter["bucket"]
 print(bucket)
 print(parameter)
 
