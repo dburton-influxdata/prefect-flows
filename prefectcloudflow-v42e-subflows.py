@@ -42,12 +42,12 @@ secret_block = Secret.load("iox-token")
 token  = secret_block.get()
 
 #Get Bucket variable from the command line
-bucket = sys.argv[1]
+#bucket = sys.argv[1]
 
-#bucket = variables.get('bucket', default='dtiolab')
+bucket = variables.get('bucket', default='dtiolab')
 
-#from prefect_github.repository import GitHubRepository
-#github_repository_block = GitHubRepository.load("github-influxdata-repo")
+from prefect.filesystems import GitHub
+github_block = GitHub.load("github-influxdata-repo")
 
 #Container Infrasturcture
 from prefect.infrastructure.docker import DockerContainer
@@ -55,7 +55,7 @@ docker_container_block = DockerContainer.load("iox-docker")
 
 #Pager Duty
 from prefect.blocks.notifications import PagerDutyWebHook
-#pagerduty_webhook_block = PagerDutyWebHook.load("pagerduty")
+pagerduty_webhook_block = PagerDutyWebHook.load("pagerduty")
 
 
 
