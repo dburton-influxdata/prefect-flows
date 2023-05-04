@@ -53,7 +53,7 @@ bucket = 'Windows'
 print(bucket)
 
 parameter = flow_run.parameters
-bucket = parameter["bucket"]
+#bucket = parameter["bucket"]
 print(bucket)
 print(parameter)
 
@@ -62,12 +62,12 @@ from prefect.filesystems import GitHub
 github_block = GitHub.load("github-influxdata-repo")
 
 #Container Infrasturcture
-from prefect.infrastructure.docker import DockerContainer
-docker_container_block = DockerContainer.load("iox-docker")
+#from prefect.infrastructure.docker import DockerContainer
+#docker_container_block = DockerContainer.load("iox-docker")
 
 #Pager Duty
-from prefect.blocks.notifications import PagerDutyWebHook
-pagerduty_webhook_block = PagerDutyWebHook.load("pagerduty")
+#from prefect.blocks.notifications import PagerDutyWebHook
+#pagerduty_webhook_block = PagerDutyWebHook.load("pagerduty")
 
 
 
@@ -391,11 +391,7 @@ def iox_prototype_subflows(bucket: str):
 
 if __name__ == "__main__":
     #bucket = sys.argv[1]
-    
+   
+    #iox_prototype_subflows(bucket="dtiolab")
+    iox_prototype_subflows(bucket)
 
-
-    #bucket = parameter("bucket", default=dtiolab)
-    iox_prototype_subflows(bucket="dtiolab")
-
-    
-    #deploy()
